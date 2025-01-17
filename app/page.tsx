@@ -14,7 +14,8 @@ export default function Home() {
         priority
       />
 
-      <div className="pt-14">
+      <div className="pt-10">
+        <p className="mb-5 ml-1">Ouvre dans :</p>
         <CountdownTimer date={startDate} />
       </div>
     </main>
