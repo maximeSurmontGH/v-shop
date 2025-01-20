@@ -52,7 +52,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ date }) => {
 
   return (
     <div className="relative text-6xl font-bold text-slate-800">
-      {timerComponents.length ? timerComponents : <span>Time is up!</span>}
+      {timerComponents}
       <div className="absolute inset-y-1/2 w-full border border-slate-800"></div>
     </div>
   );
