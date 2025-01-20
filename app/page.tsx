@@ -1,7 +1,8 @@
 import Image from "next/image";
 import CountdownTimer from "./ui/CountdownTimer";
 
-const startDate = new Date(2025, 1, 1, 15, 0, 0);
+const openDate = new Date(2025, 1, 1, 15, 0, 0);
+const nowDate = new Date();
 
 export default function Home() {
   return (
@@ -14,10 +15,14 @@ export default function Home() {
         priority
       />
 
-      <div className="pt-10">
-        <p className="mb-5 ml-1">Ouvre dans :</p>
-        <CountdownTimer date={startDate} />
-      </div>
+      {nowDate > openDate ? (
+        <p className="mt-5 text-3xl">Le magasin est ouvert</p>
+      ) : (
+        <div className="pt-10">
+          <p className="mb-5 ml-1">Ouvre dans :</p>
+          <CountdownTimer date={openDate} />
+        </div>
+      )}
     </main>
   );
 }
