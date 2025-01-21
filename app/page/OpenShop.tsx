@@ -1,30 +1,36 @@
 import Image from "next/image";
 import ScoreCounter from "../ui/ScoreCounter";
+import RandomItemRow from "../ui/RandomItemRow";
+import ItemRow, { ItemRowProps } from "../ui/ItemRow";
 
 import * as React from "react";
-import ItemRow, { ItemRowProps } from "../ui/ItemRow";
 
 const OpenShop: React.FC<object> = ({}) => {
   const items: ItemRowProps[] = [
     {
       name: "Poignée de bonbons",
       price: 100,
+      stock: 10,
     },
     {
       name: "Twix",
       price: 200,
+      stock: 0,
     },
     {
       name: "Petit paquet de chips",
       price: 350,
+      stock: 5,
     },
     {
       name: "Massage des épaules",
       price: 850,
+      stock: 5,
     },
     {
-      name: "???",
+      name: "???? ?? ?????",
       price: 9999,
+      stock: 1,
     },
   ];
 
@@ -43,12 +49,16 @@ const OpenShop: React.FC<object> = ({}) => {
           <ScoreCounter score={1000} />
         </div>
 
-        <div className="mt-10">
+        <div className="mt-10 w-full">
           {items.map((item, index) => (
             <div className="mt-2" key={index}>
               <ItemRow {...item} />
             </div>
           ))}
+        </div>
+
+        <div className="mt-10 w-full">
+          <RandomItemRow items={items} />
         </div>
       </div>
     </main>
