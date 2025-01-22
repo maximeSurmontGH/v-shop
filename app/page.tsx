@@ -5,6 +5,12 @@ import RandomItemRow from "./ui/RandomItemRow";
 import ScoreCounter from "./ui/ScoreCounter";
 import { redirect } from "next/navigation";
 import { NOT_OPEN_URL } from "./lib/pages-urls";
+import { AirTableRow } from "./model/air-table.model";
+import {
+  AIR_TABLE_HEADERS,
+  AIR_TABLE_URL,
+  AIR_TABLE_VIDAL_SCORE_ID,
+} from "./lib/air-table";
 
 export const openDate = new Date(2025, 1, 1, 15, 0, 0);
 export const nowDate = new Date();
@@ -14,35 +20,23 @@ export default async function Home() {
     redirect(NOT_OPEN_URL);
   }
 
-  const score = 349;
+  const itemsFetchData = await fetch(`${AIR_TABLE_URL}/items`, {
+    headers: AIR_TABLE_HEADERS,
+  });
+  const itemsRecords = await itemsFetchData.json();
+  const items: Item[] = itemsRecords.records.map(
+    (record: AirTableRow<Item>) => record.fields,
+  );
 
-  const items: Item[] = [
+  const scoreFetchData = await fetch(
+    `${AIR_TABLE_URL}/scores/${AIR_TABLE_VIDAL_SCORE_ID}`,
     {
-      name: "Poignée de bonbons",
-      price: 100,
-      stock: 10,
+      headers: AIR_TABLE_HEADERS,
     },
-    {
-      name: "Twix",
-      price: 200,
-      stock: 0,
-    },
-    {
-      name: "Petit paquet de chips",
-      price: 350,
-      stock: 5,
-    },
-    {
-      name: "Massage des épaules",
-      price: 850,
-      stock: 5,
-    },
-    {
-      name: "???? ?? ?????",
-      price: 9999,
-      stock: 1,
-    },
-  ];
+  );
+  const scoreRecord: AirTableRow<{ score: number }> =
+    await scoreFetchData.json();
+  const score: number = scoreRecord.fields.score;
 
   return (
     <main className="flex min-h-screen w-screen flex-col items-center bg-[#0E131F] p-10 text-xl text-white">
