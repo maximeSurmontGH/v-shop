@@ -1,15 +1,15 @@
 "use client";
 
-import * as React from "react";
+import { useState, useEffect } from "react";
 
 interface CountdownTimerProps {
   date: Date;
 }
 
 const CountdownTimer: React.FC<CountdownTimerProps> = ({ date }) => {
-  const [timeLeft, setTimeLeft] = React.useState(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);

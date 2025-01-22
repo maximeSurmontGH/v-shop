@@ -1,14 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { ItemRowProps } from "./ItemRow";
-
-import * as React from "react";
 import RandomItemDialog from "./RandomItemDialog";
 import { useState } from "react";
+import { Item } from "../model/item.model";
 
-export interface RandomItemRowProps {
-  items: ItemRowProps[];
+interface RandomItemRowProps {
+  items: Item[];
 }
 
 const RandomItemRow: React.FC<RandomItemRowProps> = ({ items }) => {

@@ -1,16 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { Item } from "../model/item.model";
 
-import * as React from "react";
-
-export interface ItemRowProps {
-  name: string;
-  price: number;
-  stock: number;
-}
-
-const ItemRow: React.FC<ItemRowProps> = ({ name, price, stock }) => {
+const ItemRow: React.FC<Item> = ({ name, price, stock }) => {
   const buy = () => {
     console.log("Not implemented.");
   };

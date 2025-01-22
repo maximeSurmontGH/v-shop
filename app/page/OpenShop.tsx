@@ -1,12 +1,11 @@
 import Image from "next/image";
 import ScoreCounter from "../ui/ScoreCounter";
 import RandomItemRow from "../ui/RandomItemRow";
-import ItemRow, { ItemRowProps } from "../ui/ItemRow";
-
-import * as React from "react";
+import ItemRow from "../ui/ItemRow";
+import { Item } from "../model/item.model";
 
 const OpenShop: React.FC<object> = ({}) => {
-  const items: ItemRowProps[] = [
+  const items: Item[] = [
     {
       name: "Poignée de bonbons",
       price: 100,

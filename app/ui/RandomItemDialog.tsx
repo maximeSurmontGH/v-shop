@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ItemRowProps } from "./ItemRow";
+import { Item } from "../model/item.model";
 
 interface RandomItemDialogProps {
-  items: ItemRowProps[];
+  items: Item[];
   onClose: () => void;
 }
 
@@ -12,8 +12,8 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
   items,
   onClose,
 }) => {
-  const getDifferentRandomItem = (currentItem: ItemRowProps | undefined) => {
-    const itemOptions = items.reduce((acc: ItemRowProps[], item) => {
+  const getDifferentRandomItem = (currentItem: Item | undefined) => {
+    const itemOptions = items.reduce((acc: Item[], item) => {
       if (item === currentItem) return acc;
       const itemOptions = Array(item.stock).fill(item);
       return [...acc, ...itemOptions];
@@ -21,7 +21,7 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
     return itemOptions[Math.floor(Math.random() * itemOptions.length)];
   };
 
-  const [selectedItem, setSelectedItem] = useState<ItemRowProps>(
+  const [selectedItem, setSelectedItem] = useState<Item>(
     getDifferentRandomItem(undefined),
   );
 
