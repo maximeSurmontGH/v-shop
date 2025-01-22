@@ -5,6 +5,8 @@ import ItemRow from "../ui/ItemRow";
 import { Item } from "../model/item.model";
 
 const OpenShop: React.FC<object> = ({}) => {
+  const score = 400;
+
   const items: Item[] = [
     {
       name: "Poignée de bonbons",
@@ -45,19 +47,19 @@ const OpenShop: React.FC<object> = ({}) => {
         />
 
         <div className="mt-10 flex w-full flex-row justify-end">
-          <ScoreCounter score={1000} />
+          <ScoreCounter score={score} />
         </div>
 
         <div className="mt-10 w-full">
           {items.map((item, index) => (
             <div className="mt-2" key={index}>
-              <ItemRow {...item} />
+              <ItemRow score={score} {...item} />
             </div>
           ))}
         </div>
 
         <div className="mt-10 w-full">
-          <RandomItemRow items={items} />
+          <RandomItemRow score={score} items={items} />
         </div>
       </div>
     </main>

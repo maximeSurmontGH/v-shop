@@ -7,9 +7,10 @@ import { Item } from "../model/item.model";
 
 interface RandomItemRowProps {
   items: Item[];
+  score: number;
 }
 
-const RandomItemRow: React.FC<RandomItemRowProps> = ({ items }) => {
+const RandomItemRow: React.FC<RandomItemRowProps> = ({ items, score }) => {
   const itemsInStock = items.filter((item) => item.stock > 0);
 
   const itemsPrice = itemsInStock.reduce(
@@ -22,6 +23,10 @@ const RandomItemRow: React.FC<RandomItemRowProps> = ({ items }) => {
 
   // arrondir à la centaine supérieure
   const averageItemPriceRounded = Math.ceil(averageItemPrice / 100) * 100;
+
+  const [canBuy] = useState<boolean>(
+    Boolean(itemsInStock.length > 0 && score >= averageItemPriceRounded),
+  );
 
   const [displayDialog, setDisplayDialog] = useState(false);
 
@@ -40,7 +45,8 @@ const RandomItemRow: React.FC<RandomItemRowProps> = ({ items }) => {
 
         <button
           onClick={buy}
-          className="rounded-full bg-slate-800 p-2 text-white"
+          className={`rounded-full bg-slate-800 p-2 text-white ${!canBuy ? "cursor-not-allowed opacity-50" : ""}`}
+          disabled={!canBuy}
         >
           <span className="ml-5 flex flex-row items-center">
             <span className="mr-1">{averageItemPriceRounded}</span>

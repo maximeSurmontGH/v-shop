@@ -2,8 +2,20 @@
 
 import Image from "next/image";
 import { Item } from "../model/item.model";
+import { useState } from "react";
 
-const ItemRow: React.FC<Item> = ({ name, price, stock }) => {
+interface PasswordDialogProps extends Item {
+  score: number;
+}
+
+const ItemRow: React.FC<PasswordDialogProps> = ({
+  name,
+  price,
+  stock,
+  score,
+}) => {
+  const [canBuy] = useState<boolean>(Boolean(stock && score >= price));
+
   const buy = () => {
     console.log("Not implemented.");
   };
@@ -22,8 +34,8 @@ const ItemRow: React.FC<Item> = ({ name, price, stock }) => {
 
       <button
         onClick={buy}
-        className={`rounded-full bg-slate-800 p-2 text-white ${stock === 0 ? "cursor-not-allowed opacity-50" : ""}`}
-        disabled={stock === 0}
+        className={`rounded-full bg-slate-800 p-2 text-white ${!canBuy ? "cursor-not-allowed opacity-50" : ""}`}
+        disabled={!canBuy}
       >
         <span className="ml-5 flex flex-row items-center">
           <span className="mr-1">{price}</span>
