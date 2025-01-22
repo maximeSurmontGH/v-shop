@@ -44,16 +44,24 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ date }) => {
     ["days", "hours", "minutes", "seconds"] as (keyof typeof timeLeft)[]
   ).forEach((interval) => {
     timerComponents.push(
-      <span className="mx-1 bg-white p-1" key={interval}>
+      <p className="mx-1 w-24 bg-white py-3 text-center" key={interval}>
         {timeLeft[interval].toString().padStart(2, "0")}
-      </span>,
+      </p>,
     );
   });
 
   return (
-    <div className="relative text-6xl font-bold text-slate-800">
-      {timerComponents}
-      <div className="absolute inset-y-1/2 w-full border border-slate-800"></div>
+    <div>
+      <div className="fex-row relative flex text-6xl font-bold text-slate-800">
+        {timerComponents}
+        <div className="absolute inset-y-1/2 w-full border border-slate-800"></div>
+      </div>
+      <div className="text-l fex-row relative flex pt-2 font-bold text-white">
+        <p className="mx-1 w-24">jours</p>
+        <p className="mx-1 w-24">heures</p>
+        <p className="mx-1 w-24">minutes</p>
+        <p className="mx-1 w-24">secondes</p>
+      </div>
     </div>
   );
 };
