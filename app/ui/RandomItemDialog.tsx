@@ -2,14 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { Item } from "../model/item.model";
+import { updateScore, updateStock } from "../server-actions/score-actions";
 
 interface RandomItemDialogProps {
   items: Item[];
+  score: number;
   onClose: () => void;
 }
 
 const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
   items,
+  score,
   onClose,
 }) => {
   const getDifferentRandomItem = (currentItem: Item | undefined) => {
@@ -28,9 +31,11 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
   const [itemSelectionStopped, setItemSelectionStopped] =
     useState<boolean>(false);
 
-  const stopItemSelection = () => {
+  const stopItemSelection = async () => {
     setItemSelectionStopped(true);
     setSelectedItem(getDifferentRandomItem(selectedItem));
+    await updateScore(score - selectedItem.price);
+    await updateStock(selectedItem.id, selectedItem.stock - 1);
   };
 
   useEffect(() => {

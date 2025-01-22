@@ -3,12 +3,14 @@
 import Image from "next/image";
 import { Item } from "../model/item.model";
 import { useState } from "react";
+import { updateScore, updateStock } from "../server-actions/score-actions";
 
 interface PasswordDialogProps extends Item {
   score: number;
 }
 
 const ItemRow: React.FC<PasswordDialogProps> = ({
+  id,
   name,
   price,
   stock,
@@ -16,8 +18,11 @@ const ItemRow: React.FC<PasswordDialogProps> = ({
 }) => {
   const [canBuy] = useState<boolean>(Boolean(stock && score >= price));
 
-  const buy = () => {
-    console.log("Not implemented.");
+  const buy = async () => {
+    if (canBuy) {
+      await updateScore(score - price);
+      await updateStock(id, stock - 1);
+    }
   };
 
   return (

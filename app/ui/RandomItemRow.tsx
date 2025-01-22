@@ -61,7 +61,11 @@ const RandomItemRow: React.FC<RandomItemRowProps> = ({ items, score }) => {
         </button>
       </div>
       {displayDialog && (
-        <RandomItemDialog items={itemsInStock} onClose={handleDialogClose} />
+        <RandomItemDialog
+          items={itemsInStock}
+          score={score}
+          onClose={handleDialogClose}
+        />
       )}
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { ChangeEvent, useState, KeyboardEvent } from "react";
+import { updateScore } from "../server-actions/score-actions";
 
 interface ScoreUpdateDialogProps {
   score: number;
@@ -23,8 +24,11 @@ const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({
     }
   };
 
-  const validateScore = () => {
-    onClose();
+  const validateScore = async () => {
+    if (newScore !== score) {
+      await updateScore(newScore);
+      onClose();
+    }
   };
 
   const goBackToShop = () => {

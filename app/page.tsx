@@ -24,9 +24,12 @@ export default async function Home() {
     headers: AIR_TABLE_HEADERS,
   });
   const itemsRecords = await itemsFetchData.json();
-  const items: Item[] = itemsRecords.records.map(
-    (record: AirTableRow<Item>) => record.fields,
-  );
+  const items: Item[] = itemsRecords.records
+    .map((record: AirTableRow<Item>) => ({
+      ...record.fields,
+      id: record.id,
+    }))
+    .sort((a: Item, b: Item) => a.price - b.price);
 
   const scoreFetchData = await fetch(
     `${AIR_TABLE_URL}/scores/${AIR_TABLE_VIDAL_SCORE_ID}`,
