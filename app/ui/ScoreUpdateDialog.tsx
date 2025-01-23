@@ -3,13 +3,15 @@
 import { ChangeEvent, useState, KeyboardEvent } from "react";
 import { updateScore } from "../server-actions/score-actions";
 import { selectScore } from "../features/score/score.slice";
-import { useAppSelector } from "../lib/hooks";
+import { useAppDispatch, useAppSelector } from "../lib/hooks";
+import { setScore } from "../features/score/score.slice";
 
 interface ScoreUpdateDialogProps {
   onClose: () => void;
 }
 
 const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({ onClose }) => {
+  const dispatch = useAppDispatch();
   const score = useAppSelector(selectScore);
 
   const [newScore, setNewScore] = useState<number>(score);
@@ -27,6 +29,7 @@ const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({ onClose }) => {
   const validateScore = async () => {
     if (newScore !== score) {
       await updateScore(newScore);
+      dispatch(setScore(newScore));
       onClose();
     }
   };

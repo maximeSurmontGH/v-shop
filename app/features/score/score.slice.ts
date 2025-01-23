@@ -16,13 +16,16 @@ export const scoreSlice = createSlice({
   name: "score",
   initialState,
   reducers: {
+    setScore: (state, action: PayloadAction<number>) => {
+      state.value = action.payload;
+    },
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
   },
 });
 
-export const { incrementByAmount } = scoreSlice.actions;
+export const { incrementByAmount, setScore } = scoreSlice.actions;
 
 export default scoreSlice.reducer;
 
