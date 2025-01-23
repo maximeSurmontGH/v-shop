@@ -12,6 +12,7 @@ import { AirTableItem, Item } from "./lib/model/item.model";
 
 const DEFAULT_FONT = Joti_One({
   weight: "400",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
