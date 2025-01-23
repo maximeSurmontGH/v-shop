@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Joti_One } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./lib/StoreProvider";
 import {
@@ -10,14 +10,8 @@ import {
 import { AirTableRow } from "./lib/model/air-table.model";
 import { AirTableItem, Item } from "./lib/model/item.model";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const DEFAULT_FONT = Joti_One({
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -56,9 +50,7 @@ export default async function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={DEFAULT_FONT.className}>
         <StoreProvider score={score} items={items}>
           {children}
         </StoreProvider>

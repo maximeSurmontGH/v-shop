@@ -10,7 +10,7 @@ const ItemRows: React.FC<object> = () => {
   return (
     <div>
       {items.map((item, index) => (
-        <div className="mt-2" key={index}>
+        <div className="mt-3" key={index}>
           <ItemRow {...item} />
         </div>
       ))}

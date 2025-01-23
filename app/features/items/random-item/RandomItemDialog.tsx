@@ -88,7 +88,7 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
                   type="button"
                   data-autofocus
                   onClick={goBackToShop}
-                  className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                  className="shadow-v-clear-purple shadow-sm-l hover:shadow-v-clear-purple hover:shadow-sm-l-hover mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                 >
                   Revenir au shop
                 </button>
@@ -97,7 +97,7 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
                   type="button"
                   data-autofocus
                   onClick={stopItemSelection}
-                  className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                  className="shadow-v-clear-blue shadow-sm-l hover:shadow-v-clear-blue hover:shadow-sm-l-hover mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                 >
                   STOOOOOOOOP !
                 </button>

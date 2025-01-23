@@ -35,7 +35,7 @@ const ScoreCounter: React.FC<object> = () => {
   return (
     <div>
       <button onClick={updateCount}>
-        <div className="flex flex-row items-center rounded-full bg-white p-1">
+        <div className="shadow-v-clear-purple shadow-md-l hover:shadow-md-l-hover hover:shadow-v-clear-purple flex flex-row items-center rounded-full bg-white p-1 hover:bg-gray-200">
           <span className="ml-5 font-bold text-slate-800">{score}</span>
           <Image
             src="/v-bucks.webp"

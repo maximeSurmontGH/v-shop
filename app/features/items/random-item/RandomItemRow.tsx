@@ -35,16 +35,16 @@ const RandomItemRow: React.FC<object> = () => {
 
   return (
     <div>
-      <div className="flex w-full flex-row items-center justify-between rounded-full bg-white p-1">
+      <button
+        onClick={buy}
+        className={`shadow-v-clear-purple shadow-md-l hover:shadow-v-clear-purple hover:shadow-md-l-hover flex w-full flex-row items-center justify-between rounded-lg bg-white p-1 hover:bg-gray-200 ${!canBuy ? "cursor-not-allowed opacity-50" : ""}`}
+        disabled={!canBuy}
+      >
         <span className="mx-5 text-slate-800">Tente ta chance 🙈</span>
 
-        <button
-          onClick={buy}
-          className={`rounded-full bg-slate-800 p-2 text-white ${!canBuy ? "cursor-not-allowed opacity-50" : ""}`}
-          disabled={!canBuy}
-        >
+        <div className="rounded-full bg-slate-800 p-2 text-white drop-shadow-lg">
           <span className="ml-5 flex flex-row items-center">
-            <span className="mr-1">{RANDOM_ITEM_PRICE}</span>
+            <span className="mr-1 font-bold">{RANDOM_ITEM_PRICE}</span>
             <Image
               src="/v-bucks.webp"
               alt="V-Bucks icon"
@@ -53,8 +53,8 @@ const RandomItemRow: React.FC<object> = () => {
               priority
             />
           </span>
-        </button>
-      </div>
+        </div>
+      </button>
       {displayDialog && (
         <RandomItemDialog items={itemsInStock} onClose={handleDialogClose} />
       )}

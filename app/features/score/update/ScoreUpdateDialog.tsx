@@ -69,7 +69,7 @@ const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({ onClose }) => {
                 type="button"
                 data-autofocus
                 onClick={validateScore}
-                className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                className="shadow-v-clear-blue shadow-sm-l hover:shadow-v-clear-blue hover:shadow-sm-l-hover mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
               >
                 Valider le score
               </button>
@@ -77,7 +77,7 @@ const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({ onClose }) => {
                 type="button"
                 data-autofocus
                 onClick={goBackToShop}
-                className="mr-2 mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                className="shadow-v-clear-purple shadow-sm-l hover:shadow-v-clear-purple hover:shadow-sm-l-hover mr-2 mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
               >
                 Revenir au shop
               </button>
