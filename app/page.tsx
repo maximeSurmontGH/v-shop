@@ -1,7 +1,7 @@
 import Image from "next/image";
-import RandomItemRow from "./ui/RandomItemRow";
-import ScoreCounter from "./ui/ScoreCounter";
-import ItemRows from "./ui/ItemRows";
+import RandomItemRow from "./features/items/random-item/RandomItemRow";
+import ScoreCounter from "./features/score/ScoreCounter";
+import ItemRows from "./features/items/list/ItemRows";
 import { redirect } from "next/navigation";
 import { NOT_OPEN_URL } from "./lib/pages-urls";
 

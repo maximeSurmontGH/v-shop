@@ -7,8 +7,8 @@ import {
   AIR_TABLE_VIDAL_SCORE_ID,
   AIR_TABLE_HEADERS,
 } from "./lib/air-table";
-import { AirTableRow } from "./model/air-table.model";
-import { Item } from "./model/item.model";
+import { AirTableRow } from "./lib/model/air-table.model";
+import { AirTableItem, Item } from "./lib/model/item.model";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +30,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log("RootLayout");
   const scoreFetchData = await fetch(
     `${AIR_TABLE_URL}/scores/${AIR_TABLE_VIDAL_SCORE_ID}`,
     {
@@ -46,7 +45,7 @@ export default async function RootLayout({
   });
   const itemsRecords = await itemsFetchData.json();
   const items: Item[] = itemsRecords.records
-    .map((record: AirTableRow<Item>) => ({
+    .map((record: AirTableRow<AirTableItem>) => ({
       ...record.fields,
       id: record.id,
     }))

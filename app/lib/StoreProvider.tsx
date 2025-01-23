@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Provider } from "react-redux";
 import { makeStore, AppStore } from "../lib/store";
 import { incrementByAmount } from "../features/score/score.slice";
-import { Item } from "../model/item.model";
+import { Item } from "./model/item.model";
 import { setItems } from "../features/items/items.slice";
 
 export default function StoreProvider({

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CountdownTimer from "@/app/ui/CountdownTimer";
+import Countdown from "@/app/features/count-down/Countdown";
 import { HOME_URL } from "@/app/lib/pages-urls";
 import { redirect } from "next/navigation";
 import { nowDate, openDate } from "@/app/page";
@@ -20,7 +20,7 @@ export default function NotOpenShop() {
         priority
       />
       <div className="pt-10">
-        <CountdownTimer date={openDate} />
+        <Countdown date={openDate} />
       </div>
     </main>
   );

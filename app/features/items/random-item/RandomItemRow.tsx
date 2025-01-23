@@ -3,9 +3,9 @@
 import Image from "next/image";
 import RandomItemDialog from "./RandomItemDialog";
 import { useEffect, useState } from "react";
-import { selectScore } from "../features/score/score.slice";
-import { useAppSelector } from "../lib/hooks";
-import { selectItems } from "../features/items/items.slice";
+import { selectScore } from "../../score/score.slice";
+import { useAppSelector } from "../../../lib/hooks";
+import { selectItems } from "../items.slice";
 
 export const RANDOM_ITEM_PRICE = 1000;
 

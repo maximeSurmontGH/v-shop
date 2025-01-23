@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Item } from "../model/item.model";
+import { Item } from "../../../lib/model/item.model";
 import {
   updateScoreInDb,
   updateStockInDb,
-} from "../server-actions/score-actions";
-import { selectScore, setScore } from "../features/score/score.slice";
-import { useAppDispatch, useAppSelector } from "../lib/hooks";
+} from "../../../server-actions/score-actions";
+import { selectScore, setScore } from "../../score/score.slice";
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks";
 import { RANDOM_ITEM_PRICE } from "./RandomItemRow";
 
 interface RandomItemDialogProps {
@@ -22,7 +22,7 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
   const dispatch = useAppDispatch();
   const score = useAppSelector(selectScore);
 
-  const getDifferentRandomItem = (currentItem: Item | undefined) => {
+  const pickRandomItem = (currentItem: Item | undefined) => {
     const itemOptions = items.reduce((acc: Item[], item) => {
       if (item === currentItem) return acc;
       const itemOptions = Array(item.stock).fill(item);
@@ -32,7 +32,7 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
   };
 
   const [selectedItem, setSelectedItem] = useState<Item>(
-    getDifferentRandomItem(undefined),
+    pickRandomItem(undefined),
   );
 
   const [itemSelectionStopped, setItemSelectionStopped] =
@@ -40,7 +40,7 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
 
   const stopItemSelection = async () => {
     setItemSelectionStopped(true);
-    setSelectedItem(getDifferentRandomItem(selectedItem));
+    setSelectedItem(pickRandomItem(selectedItem));
     const newScore = score - RANDOM_ITEM_PRICE;
     await updateScoreInDb(newScore);
     await updateStockInDb(selectedItem.id, selectedItem.stock - 1);
@@ -50,7 +50,7 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
   useEffect(() => {
     if (!itemSelectionStopped) {
       const interval = setInterval(() => {
-        setSelectedItem(getDifferentRandomItem(selectedItem));
+        setSelectedItem(pickRandomItem(selectedItem));
       }, 200);
       return () => clearInterval(interval);
     }

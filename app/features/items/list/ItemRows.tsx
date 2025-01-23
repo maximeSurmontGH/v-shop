@@ -1,8 +1,8 @@
 "use client";
 
-import { useAppSelector } from "../lib/hooks";
-import { selectItems } from "../features/items/items.slice";
-import ItemRow from "./ItemRow";
+import { useAppSelector } from "../../../lib/hooks";
+import { selectItems } from "../items.slice";
+import ItemRow from "../ItemRow";
 
 const ItemRows: React.FC<object> = () => {
   const items = useAppSelector(selectItems);

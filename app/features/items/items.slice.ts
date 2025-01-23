@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../lib/store";
-import type { Item } from "@/app/model/item.model";
+import type { Item } from "@/app/lib/model/item.model";
 
 export interface ItemState {
   value: Item[];

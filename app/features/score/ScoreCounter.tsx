@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import PasswordDialog from "./PasswordDialog";
-import ScoreUpdateDialog from "./ScoreUpdateDialog";
-import { isPasswordValid } from "../lib/password";
-import { selectScore } from "../features/score/score.slice";
-import { useAppSelector } from "../lib/hooks";
+import PasswordDialog from "../../auth/PasswordDialog";
+import ScoreUpdateDialog from "./update/ScoreUpdateDialog";
+import { isPasswordValid } from "../../lib/password";
+import { selectScore } from "./score.slice";
+import { useAppSelector } from "../../lib/hooks";
 
 const ScoreCounter: React.FC<object> = () => {
   const score = useAppSelector(selectScore);

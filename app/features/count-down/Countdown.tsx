@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 
-interface CountdownTimerProps {
+interface CountdownProps {
   date: Date;
 }
 
-const CountdownTimer: React.FC<CountdownTimerProps> = ({ date }) => {
+const Countdown: React.FC<CountdownProps> = ({ date }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
@@ -66,4 +66,4 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ date }) => {
   );
 };
 
-export default CountdownTimer;
+export default Countdown;

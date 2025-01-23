@@ -1,10 +1,9 @@
 "use client";
 
+import { useAppDispatch, useAppSelector } from "@/app/lib/hooks";
+import { updateScoreInDb } from "@/app/server-actions/score-actions";
 import { ChangeEvent, useState, KeyboardEvent } from "react";
-import { updateScoreInDb } from "../server-actions/score-actions";
-import { selectScore } from "../features/score/score.slice";
-import { useAppDispatch, useAppSelector } from "../lib/hooks";
-import { setScore } from "../features/score/score.slice";
+import { selectScore, setScore } from "../score.slice";
 
 interface ScoreUpdateDialogProps {
   onClose: () => void;

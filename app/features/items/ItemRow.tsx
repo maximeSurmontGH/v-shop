@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { Item } from "../model/item.model";
+import { Item } from "../../lib/model/item.model";
 import { useEffect, useState } from "react";
 import {
   updateScoreInDb,
   updateStockInDb,
-} from "../server-actions/score-actions";
-import { useAppDispatch, useAppSelector } from "../lib/hooks";
-import { selectScore, setScore } from "../features/score/score.slice";
+} from "../../server-actions/score-actions";
+import { useAppDispatch, useAppSelector } from "../../lib/hooks";
+import { selectScore, setScore } from "../score/score.slice";
 
 const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
   const dispatch = useAppDispatch();
