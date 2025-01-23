@@ -6,7 +6,7 @@ import {
   AIR_TABLE_HEADERS,
 } from "../lib/air-table";
 
-export const updateScore = async (newScore: number) => {
+export const updateScoreInDb = async (newScore: number) => {
   await fetch(`${AIR_TABLE_URL}/scores/${AIR_TABLE_VIDAL_SCORE_ID}`, {
     method: "PATCH",
     headers: AIR_TABLE_HEADERS,
@@ -14,7 +14,7 @@ export const updateScore = async (newScore: number) => {
   });
 };
 
-export const updateStock = async (itemId: string, newStock: number) => {
+export const updateStockInDb = async (itemId: string, newStock: number) => {
   await fetch(`${AIR_TABLE_URL}/items/${itemId}`, {
     method: "PATCH",
     headers: AIR_TABLE_HEADERS,

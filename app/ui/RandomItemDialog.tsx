@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { Item } from "../model/item.model";
-import { updateScore, updateStock } from "../server-actions/score-actions";
-import { selectScore } from "../features/score/score.slice";
-import { useAppSelector } from "../lib/hooks";
+import {
+  updateScoreInDb,
+  updateStockInDb,
+} from "../server-actions/score-actions";
+import { selectScore, setScore } from "../features/score/score.slice";
+import { useAppDispatch, useAppSelector } from "../lib/hooks";
 
 interface RandomItemDialogProps {
   items: Item[];
@@ -15,6 +18,7 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
   items,
   onClose,
 }) => {
+  const dispatch = useAppDispatch();
   const score = useAppSelector(selectScore);
 
   const getDifferentRandomItem = (currentItem: Item | undefined) => {
@@ -36,8 +40,10 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
   const stopItemSelection = async () => {
     setItemSelectionStopped(true);
     setSelectedItem(getDifferentRandomItem(selectedItem));
-    await updateScore(score - selectedItem.price);
-    await updateStock(selectedItem.id, selectedItem.stock - 1);
+    const newScore = score - selectedItem.price;
+    await updateScoreInDb(newScore);
+    await updateStockInDb(selectedItem.id, selectedItem.stock - 1);
+    dispatch(setScore(newScore));
   };
 
   useEffect(() => {

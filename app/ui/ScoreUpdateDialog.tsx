@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, useState, KeyboardEvent } from "react";
-import { updateScore } from "../server-actions/score-actions";
+import { updateScoreInDb } from "../server-actions/score-actions";
 import { selectScore } from "../features/score/score.slice";
 import { useAppDispatch, useAppSelector } from "../lib/hooks";
 import { setScore } from "../features/score/score.slice";
@@ -28,7 +28,7 @@ const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({ onClose }) => {
 
   const validateScore = async () => {
     if (newScore !== score) {
-      await updateScore(newScore);
+      await updateScoreInDb(newScore);
       dispatch(setScore(newScore));
       onClose();
     }

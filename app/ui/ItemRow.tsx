@@ -3,19 +3,25 @@
 import Image from "next/image";
 import { Item } from "../model/item.model";
 import { useState } from "react";
-import { updateScore, updateStock } from "../server-actions/score-actions";
-import { useAppSelector } from "../lib/hooks";
-import { selectScore } from "../features/score/score.slice";
+import {
+  updateScoreInDb,
+  updateStockInDb,
+} from "../server-actions/score-actions";
+import { useAppDispatch, useAppSelector } from "../lib/hooks";
+import { selectScore, setScore } from "../features/score/score.slice";
 
 const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
+  const dispatch = useAppDispatch();
   const score = useAppSelector(selectScore);
 
   const [canBuy] = useState<boolean>(Boolean(stock && score >= price));
 
   const buy = async () => {
     if (canBuy) {
-      await updateScore(score - price);
-      await updateStock(id, stock - 1);
+      const newScore = score - price;
+      await updateScoreInDb(newScore);
+      await updateStockInDb(id, stock - 1);
+      dispatch(setScore(newScore));
     }
   };
 
