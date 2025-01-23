@@ -18,7 +18,7 @@ export default async function Home() {
   await pause(3000);
 
   return (
-    <main className="bg-v-blue flex min-h-screen w-screen flex-col items-center p-10 text-xl text-white">
+    <main className="bg-v-blue flex min-h-screen w-screen flex-col items-center p-10 text-sm text-white md:text-lg">
       <div className="flex flex-col items-center justify-center">
         <div className="w[250px]">
           <Image

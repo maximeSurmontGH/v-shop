@@ -39,7 +39,7 @@ const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
       className={`shadow-v-clear-blue shadow-md-l hover:shadow-v-clear-blue hover:shadow-md-l-hover flex w-full flex-row items-center justify-between rounded-lg bg-white p-1 hover:bg-gray-200 ${!canBuy ? "cursor-not-allowed opacity-50" : ""}`}
       disabled={!canBuy}
     >
-      <span className="mx-5 text-slate-800">
+      <span className="mx-1 text-slate-800">
         {name}
 
         {stock > 0 ? (
