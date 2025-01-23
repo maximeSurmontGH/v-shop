@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Item } from "../model/item.model";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   updateScoreInDb,
   updateStockInDb,
@@ -14,7 +14,13 @@ const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
   const dispatch = useAppDispatch();
   const score = useAppSelector(selectScore);
 
-  const [canBuy] = useState<boolean>(Boolean(stock && score >= price));
+  const [canBuy, setCanBuy] = useState<boolean>(
+    Boolean(stock && score >= price),
+  );
+
+  useEffect(() => {
+    setCanBuy(Boolean(stock && score >= price));
+  }, [score, stock, price]);
 
   const buy = async () => {
     if (canBuy) {

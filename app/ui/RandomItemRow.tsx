@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import RandomItemDialog from "./RandomItemDialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { selectScore } from "../features/score/score.slice";
 import { useAppSelector } from "../lib/hooks";
 import { selectItems } from "../features/items/items.slice";
+
+export const RANDOM_ITEM_PRICE = 1000;
 
 const RandomItemRow: React.FC<object> = () => {
   const score = useAppSelector(selectScore);
@@ -13,20 +15,13 @@ const RandomItemRow: React.FC<object> = () => {
 
   const itemsInStock = items.filter((item) => item.stock > 0);
 
-  const itemsPrice = itemsInStock.reduce(
-    (acc, item) => acc + item.price * item.stock,
-    0,
+  const [canBuy, setCanBuy] = useState<boolean>(
+    Boolean(itemsInStock.length > 0 && score >= RANDOM_ITEM_PRICE),
   );
-  const itemsCount = itemsInStock.reduce((acc, item) => acc + item.stock, 0);
 
-  const averageItemPrice = itemsPrice / itemsCount;
-
-  // arrondir à la centaine supérieure
-  const averageItemPriceRounded = Math.ceil(averageItemPrice / 100) * 100;
-
-  const [canBuy] = useState<boolean>(
-    Boolean(itemsInStock.length > 0 && score >= averageItemPriceRounded),
-  );
+  useEffect(() => {
+    setCanBuy(Boolean(itemsInStock.length > 0 && score >= RANDOM_ITEM_PRICE));
+  }, [score, itemsInStock]);
 
   const [displayDialog, setDisplayDialog] = useState(false);
 
@@ -49,7 +44,7 @@ const RandomItemRow: React.FC<object> = () => {
           disabled={!canBuy}
         >
           <span className="ml-5 flex flex-row items-center">
-            <span className="mr-1">{averageItemPriceRounded}</span>
+            <span className="mr-1">{RANDOM_ITEM_PRICE}</span>
             <Image
               src="/v-bucks.webp"
               alt="V-Bucks icon"

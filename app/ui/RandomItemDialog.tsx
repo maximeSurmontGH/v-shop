@@ -8,6 +8,7 @@ import {
 } from "../server-actions/score-actions";
 import { selectScore, setScore } from "../features/score/score.slice";
 import { useAppDispatch, useAppSelector } from "../lib/hooks";
+import { RANDOM_ITEM_PRICE } from "./RandomItemRow";
 
 interface RandomItemDialogProps {
   items: Item[];
@@ -40,7 +41,7 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
   const stopItemSelection = async () => {
     setItemSelectionStopped(true);
     setSelectedItem(getDifferentRandomItem(selectedItem));
-    const newScore = score - selectedItem.price;
+    const newScore = score - RANDOM_ITEM_PRICE;
     await updateScoreInDb(newScore);
     await updateStockInDb(selectedItem.id, selectedItem.stock - 1);
     dispatch(setScore(newScore));
