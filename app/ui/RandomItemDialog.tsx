@@ -3,18 +3,20 @@
 import { useEffect, useState } from "react";
 import { Item } from "../model/item.model";
 import { updateScore, updateStock } from "../server-actions/score-actions";
+import { selectScore } from "../features/score/score.slice";
+import { useAppSelector } from "../lib/hooks";
 
 interface RandomItemDialogProps {
   items: Item[];
-  score: number;
   onClose: () => void;
 }
 
 const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
   items,
-  score,
   onClose,
 }) => {
+  const score = useAppSelector(selectScore);
+
   const getDifferentRandomItem = (currentItem: Item | undefined) => {
     const itemOptions = items.reduce((acc: Item[], item) => {
       if (item === currentItem) return acc;

@@ -5,12 +5,12 @@ import { useState } from "react";
 import PasswordDialog from "./PasswordDialog";
 import ScoreUpdateDialog from "./ScoreUpdateDialog";
 import { isPasswordValid } from "../lib/password";
+import { selectScore } from "../features/score/score.slice";
+import { useAppSelector } from "../lib/hooks";
 
-interface ScoreCounterProps {
-  score: number;
-}
+const ScoreCounter: React.FC<object> = () => {
+  const score = useAppSelector(selectScore);
 
-const ScoreCounter: React.FC<ScoreCounterProps> = ({ score }) => {
   const [openScoreUpdateDialog, setOpenScoreUpdateDialog] =
     useState<boolean>(false);
   const [openPasswordDialog, setOpenPasswordDialog] = useState<boolean>(false);
@@ -53,10 +53,7 @@ const ScoreCounter: React.FC<ScoreCounterProps> = ({ score }) => {
         />
       )}
       {openScoreUpdateDialog && (
-        <ScoreUpdateDialog
-          score={score}
-          onClose={() => setOpenScoreUpdateDialog(false)}
-        />
+        <ScoreUpdateDialog onClose={() => setOpenScoreUpdateDialog(false)} />
       )}
     </div>
   );

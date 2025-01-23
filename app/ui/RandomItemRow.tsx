@@ -3,14 +3,14 @@
 import Image from "next/image";
 import RandomItemDialog from "./RandomItemDialog";
 import { useState } from "react";
-import { Item } from "../model/item.model";
+import { selectScore } from "../features/score/score.slice";
+import { useAppSelector } from "../lib/hooks";
+import { selectItems } from "../features/items/items.slice";
 
-interface RandomItemRowProps {
-  items: Item[];
-  score: number;
-}
+const RandomItemRow: React.FC<object> = () => {
+  const score = useAppSelector(selectScore);
+  const items = useAppSelector(selectItems);
 
-const RandomItemRow: React.FC<RandomItemRowProps> = ({ items, score }) => {
   const itemsInStock = items.filter((item) => item.stock > 0);
 
   const itemsPrice = itemsInStock.reduce(
@@ -61,11 +61,7 @@ const RandomItemRow: React.FC<RandomItemRowProps> = ({ items, score }) => {
         </button>
       </div>
       {displayDialog && (
-        <RandomItemDialog
-          items={itemsInStock}
-          score={score}
-          onClose={handleDialogClose}
-        />
+        <RandomItemDialog items={itemsInStock} onClose={handleDialogClose} />
       )}
     </div>
   );

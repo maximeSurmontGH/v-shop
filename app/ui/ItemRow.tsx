@@ -4,18 +4,12 @@ import Image from "next/image";
 import { Item } from "../model/item.model";
 import { useState } from "react";
 import { updateScore, updateStock } from "../server-actions/score-actions";
+import { useAppSelector } from "../lib/hooks";
+import { selectScore } from "../features/score/score.slice";
 
-interface PasswordDialogProps extends Item {
-  score: number;
-}
+const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
+  const score = useAppSelector(selectScore);
 
-const ItemRow: React.FC<PasswordDialogProps> = ({
-  id,
-  name,
-  price,
-  stock,
-  score,
-}) => {
   const [canBuy] = useState<boolean>(Boolean(stock && score >= price));
 
   const buy = async () => {

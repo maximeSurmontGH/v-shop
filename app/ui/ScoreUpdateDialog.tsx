@@ -2,16 +2,16 @@
 
 import { ChangeEvent, useState, KeyboardEvent } from "react";
 import { updateScore } from "../server-actions/score-actions";
+import { selectScore } from "../features/score/score.slice";
+import { useAppSelector } from "../lib/hooks";
 
 interface ScoreUpdateDialogProps {
-  score: number;
   onClose: () => void;
 }
 
-const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({
-  score,
-  onClose,
-}) => {
+const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({ onClose }) => {
+  const score = useAppSelector(selectScore);
+
   const [newScore, setNewScore] = useState<number>(score);
 
   const updateNewScore = (event: ChangeEvent<HTMLInputElement>) => {
