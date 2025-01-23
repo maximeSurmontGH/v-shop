@@ -9,6 +9,7 @@ import {
 } from "../../server-actions/score-actions";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 import { selectScore, setScore } from "../score/score.slice";
+import { stockMinusOne } from "./items.slice";
 
 const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
   const dispatch = useAppDispatch();
@@ -28,6 +29,7 @@ const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
       await updateScoreInDb(newScore);
       await updateStockInDb(id, stock - 1);
       dispatch(setScore(newScore));
+      dispatch(stockMinusOne({ id }));
     }
   };
 
