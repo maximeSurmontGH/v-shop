@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Loading() {
   return (
-    <main className="bg-v-blue flex h-screen flex-col items-center justify-center text-white">
+    <main className="bg-v-blue w[400px] flex h-screen flex-col items-center justify-center text-white">
       <Image
         src="/v-shop-logo.png"
         alt="V-Shop logo"

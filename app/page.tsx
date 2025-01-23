@@ -20,13 +20,16 @@ export default async function Home() {
   return (
     <main className="bg-v-blue flex min-h-screen w-screen flex-col items-center p-10 text-xl text-white">
       <div className="flex flex-col items-center justify-center">
-        <Image
-          src="/v-shop-logo.png"
-          alt="V-Shop logo"
-          width={200}
-          height={50}
-          priority
-        />
+        <div className="w[250px]">
+          <Image
+            src="/v-shop-logo.png"
+            alt="V-Shop logo"
+            className="animate-pulse"
+            width={250}
+            height={50}
+            priority
+          />
+        </div>
 
         <div className="mt-10 flex w-full flex-row justify-end">
           <ScoreCounter />
