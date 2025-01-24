@@ -9,6 +9,7 @@ import {
 } from "./lib/air-table";
 import { AirTableRow } from "./lib/model/air-table.model";
 import { AirTableItem, Item } from "./lib/model/item.model";
+import { connection } from "next/server";
 
 const DEFAULT_FONT = Joti_One({
   weight: "400",
@@ -25,6 +26,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await connection();
+
   const scoreFetchData = await fetch(
     `${AIR_TABLE_URL}/scores/${AIR_TABLE_VIDAL_SCORE_ID}`,
     {
