@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { NOT_OPEN_URL } from "./lib/pages-urls";
 import { pause } from "./lib/pause";
 
-export const openDate = new Date(2024, 1, 1, 15, 0, 0);
+export const openDate = new Date(2025, 1, 1, 15, 0, 0);
 export const nowDate = new Date();
 
 export default async function Home() {
