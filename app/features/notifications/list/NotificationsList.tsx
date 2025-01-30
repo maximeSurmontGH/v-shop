@@ -2,10 +2,29 @@
 
 import { useAppSelector } from "../../../lib/hooks";
 import { selectNotificationsNotRead } from "../notifications.slice";
+import { useEffect, useState } from "react";
+import { EXPECTED_PASSWORD } from "@/app/auth/PasswordDialog";
 import Notification from "../Notification";
 
 const NotificationsListComponent: React.FC<object> = () => {
   const notifications = useAppSelector(selectNotificationsNotRead);
+
+  const [isAuthentified, setIsAuthentified] = useState<boolean>(false);
+
+  useEffect(() => {
+    const passwordFromLocalStorage = localStorage.getItem("password");
+    const isPasswordValid = (password: string) =>
+      password === EXPECTED_PASSWORD;
+    setIsAuthentified(
+      Boolean(
+        passwordFromLocalStorage && isPasswordValid(passwordFromLocalStorage),
+      ),
+    );
+  }, []);
+
+  if (!isAuthentified) {
+    return;
+  }
 
   return (
     <div>
