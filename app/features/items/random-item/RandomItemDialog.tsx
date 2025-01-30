@@ -42,7 +42,6 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
 
   const stopItemSelection = async () => {
     setItemSelectionStopped(true);
-    setSelectedItem(pickRandomItem(selectedItem));
     const newScore = score - RANDOM_ITEM_PRICE;
     await updateScoreInDb(newScore);
     await updateStockInDb(selectedItem.id, selectedItem.stock - 1);
