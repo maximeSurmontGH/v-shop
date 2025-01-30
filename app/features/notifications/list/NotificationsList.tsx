@@ -1,11 +1,11 @@
 "use client";
 
 import { useAppSelector } from "../../../lib/hooks";
-import { selectNotifications } from "../notifications.slice";
+import { selectNotificationsNotRead } from "../notifications.slice";
 import Notification from "../Notification";
 
 const NotificationsListComponent: React.FC<object> = () => {
-  const notifications = useAppSelector(selectNotifications);
+  const notifications = useAppSelector(selectNotificationsNotRead);
 
   return (
     <div>

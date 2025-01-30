@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../lib/store";
 import type { Notification } from "@/app/lib/model/notification.model";
@@ -35,7 +35,11 @@ export const { setNotifications, setNotificationAsRead } =
 
 export default notificationsSlice.reducer;
 
-export const selectNotifications = (state: RootState) =>
-  state.notifications.value.filter(
-    (notification: Notification) => !notification.read,
-  );
+const selectNotifications = (state: RootState) => state.notifications.value;
+
+export const selectNotificationsNotRead = createSelector(
+  selectNotifications,
+  (notifications) => {
+    return notifications.filter((notification) => !notification.read);
+  },
+);
