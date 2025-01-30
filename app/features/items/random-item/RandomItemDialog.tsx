@@ -9,7 +9,7 @@ import {
 } from "../../../server-actions/score-actions";
 import { selectScore, setScore } from "../../score/score.slice";
 import { useAppDispatch, useAppSelector } from "../../../lib/hooks";
-import { RANDOM_ITEM_PRICE } from "./RandomItemRow";
+import { RANDOM_ITEM_PRICE } from "./RandomItem";
 import { AirTableNotification } from "@/app/lib/model/notification.model";
 
 interface RandomItemDialogProps {

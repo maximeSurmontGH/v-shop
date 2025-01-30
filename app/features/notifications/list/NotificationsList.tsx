@@ -4,7 +4,7 @@ import { useAppSelector } from "../../../lib/hooks";
 import { selectNotifications } from "../notifications.slice";
 import Notification from "../Notification";
 
-const ItemRows: React.FC<object> = () => {
+const NotificationsListComponent: React.FC<object> = () => {
   const notifications = useAppSelector(selectNotifications);
 
   return (
@@ -27,4 +27,4 @@ const ItemRows: React.FC<object> = () => {
   );
 };
 
-export default ItemRows;
+export default NotificationsListComponent;

@@ -8,7 +8,7 @@ import { isPasswordValid } from "../../lib/password";
 import { selectScore } from "./score.slice";
 import { useAppSelector } from "../../lib/hooks";
 
-const ScoreCounter: React.FC<object> = () => {
+const ScoreComponent: React.FC<object> = () => {
   const score = useAppSelector(selectScore);
 
   const [openScoreUpdateDialog, setOpenScoreUpdateDialog] =
@@ -35,7 +35,7 @@ const ScoreCounter: React.FC<object> = () => {
   return (
     <div>
       <button onClick={updateCount}>
-        <div className="shadow-v-clear-purple shadow-md-l hover:shadow-md-l-hover hover:shadow-v-clear-purple flex flex-row items-center rounded-full bg-white p-1 hover:bg-gray-200">
+        <div className="flex flex-row items-center rounded-full bg-white p-1 shadow-md-l shadow-v-clear-purple hover:bg-gray-200 hover:shadow-md-l-hover hover:shadow-v-clear-purple">
           <span className="ml-5 font-bold text-slate-800">{score}</span>
           <Image
             src="/v-bucks.webp"
@@ -59,4 +59,4 @@ const ScoreCounter: React.FC<object> = () => {
   );
 };
 
-export default ScoreCounter;
+export default ScoreComponent;

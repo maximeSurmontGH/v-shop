@@ -13,7 +13,7 @@ import { selectScore, setScore } from "../score/score.slice";
 import { stockMinusOne } from "./items.slice";
 import { AirTableNotification } from "@/app/lib/model/notification.model";
 
-const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
+const ItemComponent: React.FC<Item> = ({ id, name, price, stock }) => {
   const dispatch = useAppDispatch();
   const score = useAppSelector(selectScore);
 
@@ -72,4 +72,4 @@ const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
   );
 };
 
-export default ItemRow;
+export default ItemComponent;

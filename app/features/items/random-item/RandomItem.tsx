@@ -9,7 +9,7 @@ import { selectItems } from "../items.slice";
 
 export const RANDOM_ITEM_PRICE = 500;
 
-const RandomItemRow: React.FC<object> = () => {
+const RandomItemComponent: React.FC<object> = () => {
   const score = useAppSelector(selectScore);
   const items = useAppSelector(selectItems);
 
@@ -62,4 +62,4 @@ const RandomItemRow: React.FC<object> = () => {
   );
 };
 
-export default RandomItemRow;
+export default RandomItemComponent;

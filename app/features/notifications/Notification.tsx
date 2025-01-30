@@ -5,7 +5,7 @@ import { useAppDispatch } from "../../lib/hooks";
 import { Notification } from "@/app/lib/model/notification.model";
 import { setNotificationAsRead } from "./notifications.slice";
 
-const NotificationRow: React.FC<Notification> = ({ id, content }) => {
+const NotificationComponent: React.FC<Notification> = ({ id, content }) => {
   const dispatch = useAppDispatch();
 
   const setAsRead = async () => {
@@ -27,4 +27,4 @@ const NotificationRow: React.FC<Notification> = ({ id, content }) => {
   );
 };
 
-export default NotificationRow;
+export default NotificationComponent;
