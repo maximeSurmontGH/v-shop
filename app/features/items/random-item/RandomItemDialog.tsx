@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 import { Item } from "../../../lib/model/item.model";
 import {
+  addNotificationToDb,
   updateScoreInDb,
   updateStockInDb,
 } from "../../../server-actions/score-actions";
 import { selectScore, setScore } from "../../score/score.slice";
 import { useAppDispatch, useAppSelector } from "../../../lib/hooks";
 import { RANDOM_ITEM_PRICE } from "./RandomItemRow";
+import { AirTableNotification } from "@/app/lib/model/notification.model";
 
 interface RandomItemDialogProps {
   items: Item[];
@@ -44,6 +46,11 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
     const newScore = score - RANDOM_ITEM_PRICE;
     await updateScoreInDb(newScore);
     await updateStockInDb(selectedItem.id, selectedItem.stock - 1);
+    const notification: AirTableNotification = {
+      content: `Vidal veut : "${selectedItem.name}"`,
+      read: false,
+    };
+    await addNotificationToDb(notification);
     dispatch(setScore(newScore));
   };
 
@@ -88,7 +95,7 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
                   type="button"
                   data-autofocus
                   onClick={goBackToShop}
-                  className="shadow-v-clear-purple shadow-sm-l hover:shadow-v-clear-purple hover:shadow-sm-l-hover mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                  className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm-l shadow-v-clear-purple ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:shadow-sm-l-hover hover:shadow-v-clear-purple sm:mt-0 sm:w-auto"
                 >
                   Revenir au shop
                 </button>
@@ -97,7 +104,7 @@ const RandomItemDialog: React.FC<RandomItemDialogProps> = ({
                   type="button"
                   data-autofocus
                   onClick={stopItemSelection}
-                  className="shadow-v-clear-blue shadow-sm-l hover:shadow-v-clear-blue hover:shadow-sm-l-hover mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                  className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm-l shadow-v-clear-blue ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:shadow-sm-l-hover hover:shadow-v-clear-blue sm:mt-0 sm:w-auto"
                 >
                   STOOOOOOOOP !
                 </button>

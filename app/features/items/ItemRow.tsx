@@ -4,12 +4,14 @@ import Image from "next/image";
 import { Item } from "../../lib/model/item.model";
 import { useEffect, useState } from "react";
 import {
+  addNotificationToDb,
   updateScoreInDb,
   updateStockInDb,
 } from "../../server-actions/score-actions";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 import { selectScore, setScore } from "../score/score.slice";
 import { stockMinusOne } from "./items.slice";
+import { AirTableNotification } from "@/app/lib/model/notification.model";
 
 const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
   const dispatch = useAppDispatch();
@@ -28,6 +30,11 @@ const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
       const newScore = score - price;
       await updateScoreInDb(newScore);
       await updateStockInDb(id, stock - 1);
+      const notification: AirTableNotification = {
+        content: `Vidal veut : "${name}"`,
+        read: false,
+      };
+      await addNotificationToDb(notification);
       dispatch(setScore(newScore));
       dispatch(stockMinusOne({ id }));
     }
@@ -36,16 +43,16 @@ const ItemRow: React.FC<Item> = ({ id, name, price, stock }) => {
   return (
     <button
       onClick={buy}
-      className={`shadow-v-clear-blue shadow-md-l hover:shadow-v-clear-blue hover:shadow-md-l-hover flex w-full flex-row items-center justify-between rounded-lg bg-white p-1 hover:bg-gray-200 ${!canBuy ? "cursor-not-allowed opacity-50" : ""}`}
+      className={`flex w-full flex-row items-center justify-between rounded-lg bg-white p-1 shadow-md-l shadow-v-clear-blue hover:bg-gray-200 hover:shadow-md-l-hover hover:shadow-v-clear-blue ${!canBuy ? "cursor-not-allowed opacity-50" : ""}`}
       disabled={!canBuy}
     >
       <span className="mx-1 text-slate-800">
         {name}
 
         {stock > 0 ? (
-          <span className="text-v-clear-blue ml-1 text-sm">({stock})</span>
+          <span className="ml-1 text-sm text-v-clear-blue">({stock})</span>
         ) : (
-          <span className="text-v-clear-purple ml-1 text-sm">(Épuisé)</span>
+          <span className="ml-1 text-sm text-v-clear-purple">(Épuisé)</span>
         )}
       </span>
 

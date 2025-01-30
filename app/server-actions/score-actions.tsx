@@ -5,6 +5,7 @@ import {
   AIR_TABLE_VIDAL_SCORE_ID,
   AIR_TABLE_HEADERS,
 } from "../lib/air-table";
+import { AirTableNotification } from "../lib/model/notification.model";
 
 export const updateScoreInDb = async (newScore: number) => {
   await fetch(`${AIR_TABLE_URL}/scores/${AIR_TABLE_VIDAL_SCORE_ID}`, {
@@ -27,5 +28,15 @@ export const setNotificationAsReadInDb = async (notificationId: string) => {
     method: "PATCH",
     headers: AIR_TABLE_HEADERS,
     body: JSON.stringify({ fields: { read: true } }),
+  });
+};
+
+export const addNotificationToDb = async (
+  notification: AirTableNotification,
+) => {
+  await fetch(`${AIR_TABLE_URL}/notifications`, {
+    method: "POST",
+    headers: AIR_TABLE_HEADERS,
+    body: JSON.stringify({ fields: notification }),
   });
 };
