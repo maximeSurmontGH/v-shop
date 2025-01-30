@@ -4,12 +4,10 @@ import type { RootState } from "../../lib/store";
 
 export interface ScoreState {
   value: number;
-  status: "idle" | "loading" | "failed";
 }
 
 const initialState: ScoreState = {
   value: 0,
-  status: "idle",
 };
 
 export const scoreSlice = createSlice({

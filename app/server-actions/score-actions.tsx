@@ -21,3 +21,11 @@ export const updateStockInDb = async (itemId: string, newStock: number) => {
     body: JSON.stringify({ fields: { stock: newStock } }),
   });
 };
+
+export const setNotificationAsReadInDb = async (notificationId: string) => {
+  await fetch(`${AIR_TABLE_URL}/notifications/${notificationId}`, {
+    method: "PATCH",
+    headers: AIR_TABLE_HEADERS,
+    body: JSON.stringify({ fields: { read: true } }),
+  });
+};

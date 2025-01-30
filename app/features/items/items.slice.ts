@@ -5,16 +5,14 @@ import type { Item } from "@/app/lib/model/item.model";
 
 export interface ItemState {
   value: Item[];
-  status: "idle" | "loading" | "failed";
 }
 
 const initialState: ItemState = {
   value: [],
-  status: "idle",
 };
 
 export const itemsSlice = createSlice({
-  name: "score",
+  name: "items",
   initialState,
   reducers: {
     setItems: (state, action: PayloadAction<Item[]>) => {

@@ -2,6 +2,7 @@ import Image from "next/image";
 import RandomItemRow from "./features/items/random-item/RandomItemRow";
 import ScoreCounter from "./features/score/ScoreCounter";
 import ItemRows from "./features/items/list/ItemRows";
+import NotificationList from "./features/notifications/list/NotificationList";
 import { redirect } from "next/navigation";
 import { NOT_OPEN_URL } from "./lib/pages-urls";
 import { pause } from "./lib/pause";
@@ -18,7 +19,7 @@ export default async function Home() {
   await pause(3000);
 
   return (
-    <main className="bg-v-blue flex min-h-screen w-screen flex-col items-center p-10 text-sm text-white md:text-lg">
+    <main className="flex min-h-screen w-screen flex-col items-center bg-v-blue p-10 text-sm text-white md:text-lg">
       <div className="flex flex-col items-center justify-center">
         <div className="w[250px]">
           <Image
@@ -29,6 +30,10 @@ export default async function Home() {
             height={50}
             priority
           />
+        </div>
+
+        <div className="mt-10 w-full">
+          <NotificationList />
         </div>
 
         <div className="mt-10 flex w-full flex-row justify-end">
