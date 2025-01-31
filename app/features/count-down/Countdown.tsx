@@ -1,5 +1,7 @@
 "use client";
 
+import { HOME_URL } from "@/app/lib/pages-urls";
+import { redirect } from "next/navigation";
 import { useState, useEffect } from "react";
 
 interface CountdownProps {
@@ -11,7 +13,18 @@ const Countdown: React.FC<CountdownProps> = ({ date }) => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      const newTimeLeft = calculateTimeLeft();
+      setTimeLeft(newTimeLeft);
+
+      if (
+        newTimeLeft.days <= 0 &&
+        newTimeLeft.hours <= 0 &&
+        newTimeLeft.minutes <= 0 &&
+        newTimeLeft.seconds <= 0
+      ) {
+        clearInterval(timer);
+        redirect(HOME_URL);
+      }
     }, 1000);
 
     return () => clearInterval(timer);

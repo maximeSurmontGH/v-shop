@@ -2,10 +2,10 @@ import Image from "next/image";
 import Countdown from "@/app/features/count-down/Countdown";
 import { HOME_URL } from "@/app/lib/pages-urls";
 import { redirect } from "next/navigation";
-import { nowDate, openDate } from "@/app/page";
+import { openDate } from "@/app/page";
 
 export default function NotOpenShop() {
-  if (nowDate >= openDate) {
+  if (new Date() >= openDate) {
     redirect(HOME_URL);
   }
 

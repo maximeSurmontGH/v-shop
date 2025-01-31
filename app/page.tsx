@@ -8,10 +8,9 @@ import { NOT_OPEN_URL } from "./lib/pages-urls";
 import { pause } from "./lib/pause";
 
 export const openDate = new Date(2025, 1, 1, 14, 0, 0);
-export const nowDate = new Date();
 
 export default async function Home() {
-  if (nowDate < openDate) {
+  if (new Date() < openDate) {
     redirect(NOT_OPEN_URL);
   }
 
