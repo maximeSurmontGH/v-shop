@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import scoreReducer from "../features/score/score.slice";
 import itemsReducer from "../features/items/items.slice";
+import notificationsReducer from "../features/notifications/notifications.slice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       score: scoreReducer,
       items: itemsReducer,
+      notifications: notificationsReducer,
     },
   });
 };

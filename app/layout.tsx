@@ -10,6 +10,10 @@ import {
 import { AirTableRow } from "./lib/model/air-table.model";
 import { AirTableItem, Item } from "./lib/model/item.model";
 import { connection } from "next/server";
+import {
+  AirTableNotification,
+  Notification,
+} from "./lib/model/notification.model";
 
 const DEFAULT_FONT = Joti_One({
   weight: "400",
@@ -46,8 +50,21 @@ export default async function RootLayout({
     .map((record: AirTableRow<AirTableItem>) => ({
       ...record.fields,
       id: record.id,
+      loading: false,
     }))
     .sort((a: Item, b: Item) => a.price - b.price);
+
+  const notificationsFetchData = await fetch(`${AIR_TABLE_URL}/notifications`, {
+    headers: AIR_TABLE_HEADERS,
+  });
+  const notificationsRecords = await notificationsFetchData.json();
+  const notifications: Notification[] = notificationsRecords.records.map(
+    (record: AirTableRow<AirTableNotification>) => ({
+      ...record.fields,
+      id: record.id,
+      loading: false,
+    }),
+  );
 
   return (
     <html lang="en">
@@ -55,7 +72,11 @@ export default async function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={DEFAULT_FONT.className}>
-        <StoreProvider score={score} items={items}>
+        <StoreProvider
+          score={score}
+          items={items}
+          notifications={notifications}
+        >
           {children}
         </StoreProvider>
       </body>

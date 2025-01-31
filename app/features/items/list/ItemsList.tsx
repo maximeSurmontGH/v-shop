@@ -2,20 +2,20 @@
 
 import { useAppSelector } from "../../../lib/hooks";
 import { selectItems } from "../items.slice";
-import ItemRow from "../ItemRow";
+import Item from "../Item";
 
-const ItemRows: React.FC<object> = () => {
+const ItemsListComponent: React.FC<object> = () => {
   const items = useAppSelector(selectItems);
 
   return (
     <div>
       {items.map((item, index) => (
         <div className="mt-3" key={index}>
-          <ItemRow {...item} />
+          <Item {...item} />
         </div>
       ))}
     </div>
   );
 };
 
-export default ItemRows;
+export default ItemsListComponent;

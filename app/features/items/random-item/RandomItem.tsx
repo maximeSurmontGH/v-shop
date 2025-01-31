@@ -7,9 +7,9 @@ import { selectScore } from "../../score/score.slice";
 import { useAppSelector } from "../../../lib/hooks";
 import { selectItems } from "../items.slice";
 
-export const RANDOM_ITEM_PRICE = 1000;
+export const RANDOM_ITEM_PRICE = 500;
 
-const RandomItemRow: React.FC<object> = () => {
+const RandomItemComponent: React.FC<object> = () => {
   const score = useAppSelector(selectScore);
   const items = useAppSelector(selectItems);
 
@@ -37,7 +37,7 @@ const RandomItemRow: React.FC<object> = () => {
     <div>
       <button
         onClick={buy}
-        className={`shadow-v-clear-purple shadow-md-l hover:shadow-v-clear-purple hover:shadow-md-l-hover flex w-full flex-row items-center justify-between rounded-lg bg-white p-1 hover:bg-gray-200 ${!canBuy ? "cursor-not-allowed opacity-50" : ""}`}
+        className={`flex w-full flex-row items-center justify-between rounded-lg bg-white p-1 shadow-md-l shadow-v-clear-purple hover:bg-gray-200 hover:shadow-md-l-hover hover:shadow-v-clear-purple ${!canBuy ? "cursor-not-allowed opacity-50" : ""}`}
         disabled={!canBuy}
       >
         <span className="mx-5 text-slate-800">Tente ta chance 🙈</span>
@@ -62,4 +62,4 @@ const RandomItemRow: React.FC<object> = () => {
   );
 };
 
-export default RandomItemRow;
+export default RandomItemComponent;

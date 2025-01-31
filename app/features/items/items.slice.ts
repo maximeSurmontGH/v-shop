@@ -5,20 +5,27 @@ import type { Item } from "@/app/lib/model/item.model";
 
 export interface ItemState {
   value: Item[];
-  status: "idle" | "loading" | "failed";
 }
 
 const initialState: ItemState = {
   value: [],
-  status: "idle",
 };
 
 export const itemsSlice = createSlice({
-  name: "score",
+  name: "items",
   initialState,
   reducers: {
     setItems: (state, action: PayloadAction<Item[]>) => {
       state.value = action.payload;
+    },
+    toggleItemLoading: (state, action: PayloadAction<{ id: string }>) => {
+      state.value = state.value.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, loading: !item.loading };
+        } else {
+          return item;
+        }
+      });
     },
     stockMinusOne: (state, action: PayloadAction<{ id: string }>) => {
       state.value = state.value.map((item) => {
@@ -32,7 +39,8 @@ export const itemsSlice = createSlice({
   },
 });
 
-export const { setItems, stockMinusOne } = itemsSlice.actions;
+export const { setItems, toggleItemLoading, stockMinusOne } =
+  itemsSlice.actions;
 
 export default itemsSlice.reducer;
 

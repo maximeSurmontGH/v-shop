@@ -1,7 +1,8 @@
 import Image from "next/image";
-import RandomItemRow from "./features/items/random-item/RandomItemRow";
-import ScoreCounter from "./features/score/ScoreCounter";
-import ItemRows from "./features/items/list/ItemRows";
+import RandomItem from "./features/items/random-item/RandomItem";
+import ScoreCounter from "./features/score/Score";
+import ItemsList from "./features/items/list/ItemsList";
+import NotificationsList from "./features/notifications/list/NotificationsList";
 import { redirect } from "next/navigation";
 import { NOT_OPEN_URL } from "./lib/pages-urls";
 import { pause } from "./lib/pause";
@@ -18,11 +19,11 @@ export default async function Home() {
   await pause(3000);
 
   return (
-    <main className="bg-v-blue flex min-h-screen w-screen flex-col items-center p-10 text-sm text-white md:text-lg">
+    <main className="flex min-h-screen w-screen flex-col items-center bg-v-blue p-10 text-sm text-white md:text-lg">
       <div className="flex flex-col items-center justify-center">
         <div className="w[250px]">
           <Image
-            src="/v-shop-logo.png"
+            src="/v-shop-logo.webp"
             alt="V-Shop logo"
             className="animate-pulse"
             width={250}
@@ -31,16 +32,20 @@ export default async function Home() {
           />
         </div>
 
+        <div className="mt-10 w-full">
+          <NotificationsList />
+        </div>
+
         <div className="mt-10 flex w-full flex-row justify-end">
           <ScoreCounter />
         </div>
 
         <div className="mt-10 w-full">
-          <ItemRows />
+          <ItemsList />
         </div>
 
         <div className="mt-10 w-full">
-          <RandomItemRow />
+          <RandomItem />
         </div>
       </div>
     </main>

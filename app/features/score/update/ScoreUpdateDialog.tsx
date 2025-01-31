@@ -3,7 +3,7 @@
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks";
 import { updateScoreInDb } from "@/app/server-actions/score-actions";
 import { ChangeEvent, useState, KeyboardEvent } from "react";
-import { selectScore, setScore } from "../score.slice";
+import { selectScore, setScore, toggleScoreLoading } from "../score.slice";
 
 interface ScoreUpdateDialogProps {
   onClose: () => void;
@@ -27,8 +27,11 @@ const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({ onClose }) => {
 
   const validateScore = async () => {
     if (newScore !== score) {
+      dispatch(toggleScoreLoading());
       await updateScoreInDb(newScore);
       dispatch(setScore(newScore));
+      dispatch(toggleScoreLoading());
+
       onClose();
     }
   };
@@ -69,7 +72,8 @@ const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({ onClose }) => {
                 type="button"
                 data-autofocus
                 onClick={validateScore}
-                className="shadow-v-clear-blue shadow-sm-l hover:shadow-v-clear-blue hover:shadow-sm-l-hover mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                disabled={newScore === score}
+                className={`mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm-l shadow-v-clear-blue ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:shadow-sm-l-hover hover:shadow-v-clear-blue sm:mt-0 sm:w-auto ${newScore === score ? "cursor-not-allowed opacity-50" : ""}`}
               >
                 Valider le score
               </button>
@@ -77,7 +81,7 @@ const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({ onClose }) => {
                 type="button"
                 data-autofocus
                 onClick={goBackToShop}
-                className="shadow-v-clear-purple shadow-sm-l hover:shadow-v-clear-purple hover:shadow-sm-l-hover mr-2 mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                className="mr-2 mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm-l shadow-v-clear-purple ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:shadow-sm-l-hover hover:shadow-v-clear-purple sm:mt-0 sm:w-auto"
               >
                 Revenir au shop
               </button>

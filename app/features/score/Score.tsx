@@ -1,15 +1,17 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
+import { isPasswordValid } from "../../lib/password";
+import { selectScore, selectScoreLoading } from "./score.slice";
+import { useAppSelector } from "../../lib/hooks";
+import Image from "next/image";
 import PasswordDialog from "../../auth/PasswordDialog";
 import ScoreUpdateDialog from "./update/ScoreUpdateDialog";
-import { isPasswordValid } from "../../lib/password";
-import { selectScore } from "./score.slice";
-import { useAppSelector } from "../../lib/hooks";
+import Loading from "../loading/Loading";
 
-const ScoreCounter: React.FC<object> = () => {
+const ScoreComponent: React.FC<object> = () => {
   const score = useAppSelector(selectScore);
+  const scoreLoading = useAppSelector(selectScoreLoading);
 
   const [openScoreUpdateDialog, setOpenScoreUpdateDialog] =
     useState<boolean>(false);
@@ -35,15 +37,21 @@ const ScoreCounter: React.FC<object> = () => {
   return (
     <div>
       <button onClick={updateCount}>
-        <div className="shadow-v-clear-purple shadow-md-l hover:shadow-md-l-hover hover:shadow-v-clear-purple flex flex-row items-center rounded-full bg-white p-1 hover:bg-gray-200">
-          <span className="ml-5 font-bold text-slate-800">{score}</span>
-          <Image
-            src="/v-bucks.webp"
-            alt="V-Bucks icon"
-            width={40}
-            height={40}
-            priority
-          />
+        <div className="rounded-full bg-white p-1 shadow-md-l shadow-v-clear-purple hover:bg-gray-200 hover:shadow-md-l-hover hover:shadow-v-clear-purple">
+          {scoreLoading ? (
+            <Loading />
+          ) : (
+            <div className="flex flex-row items-center">
+              <span className="ml-5 font-bold text-slate-800">{score}</span>
+              <Image
+                src="/v-bucks.webp"
+                alt="V-Bucks icon"
+                width={40}
+                height={40}
+                priority
+              />
+            </div>
+          )}
         </div>
       </button>
       {openPasswordDialog && (
@@ -59,4 +67,4 @@ const ScoreCounter: React.FC<object> = () => {
   );
 };
 
-export default ScoreCounter;
+export default ScoreComponent;
