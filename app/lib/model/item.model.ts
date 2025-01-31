@@ -6,4 +6,5 @@ export interface AirTableItem {
 
 export interface Item extends AirTableItem {
   id: string;
+  loading: boolean;
 }

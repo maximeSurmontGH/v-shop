@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Item } from "../../lib/model/item.model";
 import { useEffect, useState } from "react";
 import {
@@ -10,10 +9,12 @@ import {
 } from "../../server-actions/score-actions";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 import { selectScore, setScore } from "../score/score.slice";
-import { stockMinusOne } from "./items.slice";
+import { stockMinusOne, toggleItemLoading } from "./items.slice";
 import { AirTableNotification } from "@/app/lib/model/notification.model";
+import Image from "next/image";
+import Loading from "../loading/Loading";
 
-const ItemComponent: React.FC<Item> = ({ id, name, price, stock }) => {
+const ItemComponent: React.FC<Item> = ({ id, name, price, stock, loading }) => {
   const dispatch = useAppDispatch();
   const score = useAppSelector(selectScore);
 
@@ -28,6 +29,7 @@ const ItemComponent: React.FC<Item> = ({ id, name, price, stock }) => {
   const buy = async () => {
     if (canBuy) {
       const newScore = score - price;
+      dispatch(toggleItemLoading({ id }));
       await updateScoreInDb(newScore);
       await updateStockInDb(id, stock - 1);
       const notification: AirTableNotification = {
@@ -37,6 +39,7 @@ const ItemComponent: React.FC<Item> = ({ id, name, price, stock }) => {
       await addNotificationToDb(notification);
       dispatch(setScore(newScore));
       dispatch(stockMinusOne({ id }));
+      dispatch(toggleItemLoading({ id }));
     }
   };
 
@@ -57,16 +60,20 @@ const ItemComponent: React.FC<Item> = ({ id, name, price, stock }) => {
       </span>
 
       <div className="rounded-full bg-slate-800 p-2 text-white">
-        <span className="ml-5 flex flex-row items-center">
-          <span className="mr-1 font-bold">{price}</span>
-          <Image
-            src="/v-bucks.webp"
-            alt="V-Bucks icon"
-            width={25}
-            height={25}
-            priority
-          />
-        </span>
+        {loading ? (
+          <Loading />
+        ) : (
+          <span className="ml-5 flex flex-row items-center">
+            <span className="mr-1 font-bold">{price}</span>
+            <Image
+              src="/v-bucks.webp"
+              alt="V-Bucks icon"
+              width={25}
+              height={25}
+              priority
+            />
+          </span>
+        )}
       </div>
     </button>
   );

@@ -50,6 +50,7 @@ export default async function RootLayout({
     .map((record: AirTableRow<AirTableItem>) => ({
       ...record.fields,
       id: record.id,
+      loading: false,
     }))
     .sort((a: Item, b: Item) => a.price - b.price);
 
@@ -61,6 +62,7 @@ export default async function RootLayout({
     (record: AirTableRow<AirTableNotification>) => ({
       ...record.fields,
       id: record.id,
+      loading: false,
     }),
   );
 

@@ -5,4 +5,5 @@ export interface AirTableNotification {
 
 export interface Notification extends AirTableNotification {
   id: string;
+  loading: boolean;
 }

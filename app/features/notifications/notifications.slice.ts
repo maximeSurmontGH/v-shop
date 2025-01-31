@@ -18,6 +18,18 @@ export const notificationsSlice = createSlice({
     setNotifications: (state, action: PayloadAction<Notification[]>) => {
       state.value = action.payload;
     },
+    toggleNotificationLoading: (
+      state,
+      action: PayloadAction<{ id: string }>,
+    ) => {
+      state.value = state.value.map((notification) => {
+        if (notification.id === action.payload.id) {
+          return { ...notification, loading: !notification.loading };
+        } else {
+          return notification;
+        }
+      });
+    },
     setNotificationAsRead: (state, action: PayloadAction<{ id: string }>) => {
       state.value = state.value.map((notification) => {
         if (notification.id === action.payload.id) {
@@ -30,8 +42,11 @@ export const notificationsSlice = createSlice({
   },
 });
 
-export const { setNotifications, setNotificationAsRead } =
-  notificationsSlice.actions;
+export const {
+  setNotifications,
+  toggleNotificationLoading,
+  setNotificationAsRead,
+} = notificationsSlice.actions;
 
 export default notificationsSlice.reducer;
 

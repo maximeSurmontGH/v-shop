@@ -18,6 +18,15 @@ export const itemsSlice = createSlice({
     setItems: (state, action: PayloadAction<Item[]>) => {
       state.value = action.payload;
     },
+    toggleItemLoading: (state, action: PayloadAction<{ id: string }>) => {
+      state.value = state.value.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, loading: !item.loading };
+        } else {
+          return item;
+        }
+      });
+    },
     stockMinusOne: (state, action: PayloadAction<{ id: string }>) => {
       state.value = state.value.map((item) => {
         if (item.id === action.payload.id) {
@@ -30,7 +39,8 @@ export const itemsSlice = createSlice({
   },
 });
 
-export const { setItems, stockMinusOne } = itemsSlice.actions;
+export const { setItems, toggleItemLoading, stockMinusOne } =
+  itemsSlice.actions;
 
 export default itemsSlice.reducer;
 
