@@ -72,7 +72,8 @@ const ScoreUpdateDialog: React.FC<ScoreUpdateDialogProps> = ({ onClose }) => {
                 type="button"
                 data-autofocus
                 onClick={validateScore}
-                className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm-l shadow-v-clear-blue ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:shadow-sm-l-hover hover:shadow-v-clear-blue sm:mt-0 sm:w-auto"
+                disabled={newScore === score}
+                className={`mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm-l shadow-v-clear-blue ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:shadow-sm-l-hover hover:shadow-v-clear-blue sm:mt-0 sm:w-auto ${newScore === score ? "cursor-not-allowed opacity-50" : ""}`}
               >
                 Valider le score
               </button>
